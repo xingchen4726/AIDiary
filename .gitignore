@@ -1,0 +1,41 @@
+# 微信小程序项目忽略文件
+
+# 依赖包
+node_modules/
+package-lock.json
+
+# 配置文件
+config.js
+project.private.config.json
+
+# 日志文件
+logs/
+*.log
+
+# 构建产物
+dist/
+build/
+
+# 编辑器相关
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统相关
+.DS_Store
+Thumbs.db
+
+# 临时文件
+*.tmp
+*.temp
+
+# 本地环境配置
+.env
+.env.local
+.env.*.local
+
+# 云函数本地依赖
+cloudfunctions/**/node_modules/
+cloudfunctions/**/package-lock.json

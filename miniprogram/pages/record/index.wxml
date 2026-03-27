@@ -1,0 +1,26 @@
+<!--record/index.wxml-->
+<view class="container">
+  <view class="header">
+    <text class="title">AI流水账</text>
+  </view>
+  
+  <view class="input-section">
+    <textarea class="input-area" placeholder="请输入流水账内容..." bindinput="inputContent" value="{{inputValue}}"></textarea>
+    <button class="save-btn" bindtap="saveInput">保存</button>
+  </view>
+  
+  <view class="records-list" wx:if="records.length > 0">
+    <text class="list-title">最近记录</text>
+    <view class="record-item" wx:for="{{records}}" wx:key="id">
+      <view class="record-item-content">
+        <text class="record-item-text">{{item.content}}</text>
+        <text class="record-item-time">{{item.createTime}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <view class="summary-section">
+    <button class="summary-btn" bindtap="getDailySummary">每日总结</button>
+    <button class="summary-btn" bindtap="getWeeklySummary">每周总结</button>
+  </view>
+</view>

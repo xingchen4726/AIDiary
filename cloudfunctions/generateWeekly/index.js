@@ -9,7 +9,7 @@ cloud.init({
 const db = cloud.database();
 
 // 从配置文件读取敏感信息
-const config = require('../../config.js');
+const config = require('./config.js');
 const { apiKey, apiUrl, epId, modelName } = config.aiConfig;
 
 // 调用 AI API 生成周报

@@ -14,7 +14,12 @@ const { apiKey, apiUrl, epId, modelName } = config.aiConfig;
 
 // 调用 AI API 生成日记
 async function generateDiaryContent(records) {
-  const content = records.map(record => record.content).join('\n');
+  const content = records.map(record => {
+    if (record.recordType === 'audio') {
+      return record.transcript || record.content;
+    }
+    return record.content;
+  }).join('\n');
   
   try {
     // 构建提示词
@@ -67,18 +72,38 @@ exports.config = {
 exports.main = async (event, context) => {
   try {
     console.log('开始生成日记', event);
-    const { date } = event;
+    const { date, startTimestamp, endTimestamp } = event;
     const wxContext = cloud.getWXContext();
     const openid = wxContext.OPENID;
     
     // 获取当天的记录
     console.log('获取当天记录', date, openid);
-    const records = await db.collection('records')
-      .where({ 
-        date: date,
-        _openid: openid
-      })
-      .get();
+    let records;
+    if (startTimestamp && endTimestamp) {
+      const _ = db.command;
+      records = await db.collection('records')
+        .where({
+          _openid: openid,
+          timestamp: _.gte(startTimestamp).and(_.lte(endTimestamp))
+        })
+        .get();
+
+      if (records.data.length === 0 && date) {
+        records = await db.collection('records')
+          .where({
+            date: date,
+            _openid: openid
+          })
+          .get();
+      }
+    } else {
+      records = await db.collection('records')
+        .where({ 
+          date: date,
+          _openid: openid
+        })
+        .get();
+    }
     
     console.log('获取到记录', records.data.length);
     if (records.data.length === 0) {

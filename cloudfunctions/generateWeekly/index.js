@@ -14,7 +14,12 @@ const { apiKey, apiUrl, epId, modelName } = config.aiConfig;
 
 // 调用 AI API 生成周报
 async function generateWeeklyContent(records) {
-  const content = records.map(record => record.content).join('\n');
+  const content = records.map(record => {
+    if (record.recordType === 'audio') {
+      return record.transcript || record.content;
+    }
+    return record.content;
+  }).join('\n');
   
   try {
     // 构建提示词

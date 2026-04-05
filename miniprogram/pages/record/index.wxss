@@ -1,71 +1,201 @@
-/* record/index.wxss */
 .container {
-  padding: 20rpx;
   min-height: 100vh;
-  background-color: #f5f5f5;
+  padding: 32rpx 24rpx 48rpx;
+  background: linear-gradient(180deg, #f4f8ff 0%, #f6f7fb 42%, #edf2ff 100%);
+  box-sizing: border-box;
 }
 
 .header {
-  text-align: center;
-  margin-bottom: 40rpx;
+  margin-bottom: 28rpx;
 }
 
 .title {
-  font-size: 32rpx;
-  font-weight: bold;
-  color: #333;
+  display: block;
+  font-size: 52rpx;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.2;
 }
 
-.input-section {
-  background-color: white;
-  border-radius: 12rpx;
-  padding: 20rpx;
-  margin-bottom: 40rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+.subtitle {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #667085;
+  line-height: 1.6;
+}
+
+.hero-card {
+  margin-bottom: 24rpx;
+  padding: 30rpx;
+  border-radius: 32rpx;
+  background: linear-gradient(135deg, #4f7cff 0%, #6d5dfc 52%, #7f9dff 100%);
+  box-shadow: 0 24rpx 48rpx rgba(79, 124, 255, 0.18);
+}
+
+.hero-badge {
+  display: inline-flex;
+  padding: 10rpx 20rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 22rpx;
+}
+
+.hero-title {
+  display: block;
+  margin-top: 24rpx;
+  font-size: 38rpx;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.hero-desc {
+  display: block;
+  margin-top: 14rpx;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.7;
+}
+
+.section-card {
+  padding: 28rpx;
+  border-radius: 28rpx;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18rpx 40rpx rgba(15, 23, 42, 0.06);
+}
+
+.input-section,
+.records-list {
+  margin-bottom: 24rpx;
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.section-desc {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: #98a2b3;
+}
+
+.section-tag {
+  flex-shrink: 0;
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 22rpx;
 }
 
 .input-area {
   width: 100%;
-  min-height: 200rpx;
-  padding: 20rpx;
-  border: 1rpx solid #e0e0e0;
-  border-radius: 8rpx;
+  min-height: 260rpx;
+  padding: 24rpx;
+  border: 2rpx solid #dbe4ff;
+  border-radius: 24rpx;
+  background: #f8faff;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  line-height: 1.7;
+  color: #1f2937;
+}
+
+.voice-bar {
+  margin: 22rpx 0 24rpx;
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+}
+
+.voice-btn {
+  margin: 0;
+  min-width: 236rpx;
+  height: 86rpx;
+  padding: 0 24rpx;
+  border: none;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #6d5dfc 0%, #4f7cff 100%);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  box-shadow: 0 16rpx 30rpx rgba(109, 93, 252, 0.24);
+}
+
+.voice-btn::after,
+.save-btn::after,
+.summary-btn::after {
+  border: none;
+}
+
+.voice-btn-recording {
+  animation: pulse 1.2s infinite;
+  background: linear-gradient(135deg, #ff6a6a 0%, #ff8a5b 100%);
+  box-shadow: 0 16rpx 30rpx rgba(255, 106, 106, 0.24);
+}
+
+.voice-btn-icon {
+  font-size: 28rpx;
+}
+
+.voice-btn-text {
+  font-size: 26rpx;
+  font-weight: 500;
+}
+
+.voice-status {
+  flex: 1;
   font-size: 24rpx;
-  margin-bottom: 20rpx;
-  resize: none;
+  color: #667085;
+  line-height: 1.6;
 }
 
 .save-btn {
   width: 100%;
-  height: 80rpx;
-  border-radius: 40rpx;
-  background-color: #07c160;
-  color: white;
-  font-size: 24rpx;
+  height: 88rpx;
+  margin: 0;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16rpx 28rpx rgba(34, 197, 94, 0.22);
 }
 
-.records-list {
-  background-color: white;
-  border-radius: 12rpx;
-  padding: 20rpx;
-  margin-bottom: 40rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+.records-count {
+  flex-shrink: 0;
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  background: #f2f4f7;
+  color: #475467;
+  font-size: 22rpx;
 }
 
-.list-title {
-  font-size: 28rpx;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20rpx;
+.records-scroll {
+  max-height: 720rpx;
 }
 
 .record-item {
-  padding: 20rpx 0;
-  border-bottom: 1rpx solid #f0f0f0;
+  padding: 22rpx 0;
+  border-bottom: 1rpx solid #edf2f7;
 }
 
 .record-item:last-child {
@@ -75,79 +205,128 @@
 .record-item-content {
   display: flex;
   flex-direction: column;
+  gap: 12rpx;
+}
+
+.audio-record-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18rpx;
+}
+
+.audio-record-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.audio-record-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1d4ed8;
+}
+
+.audio-record-desc {
+  font-size: 22rpx;
+  color: #667085;
+}
+
+.audio-record-note {
+  font-size: 24rpx;
+  color: #475467;
+  line-height: 1.6;
+}
+
+.audio-play-btn {
+  min-width: 128rpx;
+  height: 64rpx;
+  margin: 0;
+  padding: 0 22rpx;
+  border-radius: 999rpx;
+  background: #eef4ff;
+  color: #1d4ed8;
+  font-size: 24rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audio-play-btn::after {
+  border: none;
+}
+
+.audio-play-btn-active {
+  background: linear-gradient(135deg, #4f7cff 0%, #6d5dfc 100%);
+  color: #ffffff;
 }
 
 .record-item-text {
-  font-size: 24rpx;
-  color: #333;
-  margin-bottom: 10rpx;
-  line-height: 1.5;
+  font-size: 28rpx;
+  color: #1f2937;
+  line-height: 1.7;
+  word-break: break-word;
 }
 
 .record-item-time {
-  font-size: 20rpx;
-  color: #999;
-  align-self: flex-end;
+  font-size: 22rpx;
+  color: #98a2b3;
+}
+
+.empty-state {
+  padding: 70rpx 24rpx 60rpx;
+  text-align: center;
+}
+
+.empty-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #344054;
+}
+
+.empty-desc {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #98a2b3;
+  line-height: 1.7;
 }
 
 .summary-section {
   display: flex;
-  justify-content: space-around;
+  gap: 20rpx;
 }
 
 .summary-btn {
-  width: 300rpx;
-  height: 80rpx;
-  border-radius: 40rpx;
-  background-color: #07c160;
-  color: white;
-  font-size: 24rpx;
+  flex: 1;
+  height: 88rpx;
+  margin: 0;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #4f7cff 0%, #6d5dfc 100%);
+  color: #ffffff;
+  font-size: 26rpx;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16rpx 30rpx rgba(79, 124, 255, 0.2);
+}
+
+.summary-btn-light {
+  background: linear-gradient(135deg, #14b8a6 0%, #0ea5e9 100%);
+  box-shadow: 0 16rpx 30rpx rgba(14, 165, 233, 0.2);
 }
 
 @keyframes pulse {
   0% {
     transform: scale(1);
-    opacity: 1;
   }
   50% {
-    transform: scale(1.1);
-    opacity: 0.8;
+    transform: scale(1.04);
   }
   100% {
     transform: scale(1);
-    opacity: 1;
   }
-}
-
-/* 麦克风图标样式 */
-.microphone-icon {
-  width: 60rpx;
-  height: 60rpx;
-  position: relative;
-}
-
-.microphone-icon::before {
-  content: '';
-  position: absolute;
-  width: 30rpx;
-  height: 40rpx;
-  background-color: white;
-  border-radius: 15rpx 15rpx 0 0;
-  top: 0;
-  left: 15rpx;
-}
-
-.microphone-icon::after {
-  content: '';
-  position: absolute;
-  width: 40rpx;
-  height: 20rpx;
-  background-color: white;
-  border-radius: 20rpx;
-  bottom: 0;
-  left: 10rpx;
 }

@@ -30,7 +30,7 @@
       </button>
       <text class="voice-status">{{voiceStatus}}</text>
     </view>
-    <button class="save-btn" bindtap="saveInput" disabled="{{!inputValue.trim()}}">
+    <button class="save-btn" bindtap="saveInput">
       <text class="save-btn-icon">💾</text>
       <text class="save-btn-text">保存记录</text>
     </button>

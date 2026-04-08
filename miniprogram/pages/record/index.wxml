@@ -1,19 +1,18 @@
 <view class="container">
   <view class="header">
     <text class="title">AI 流水账</text>
-    <text class="subtitle">支持语音记录和 AI 智能总结</text>
+    <text class="subtitle">支持 AI 智能总结</text>
   </view>
 
   <view class="hero-card">
     <view class="hero-badge">随时记录灵感与日常</view>
     <text class="hero-title">想到什么，就立刻记下来</text>
-    <text class="hero-desc">除了文字速记，现在也可以直接保存语音记录，随手说一句就能留下当下想法。</text>
+    <text class="hero-desc">通过文字速记，快速记录下当下的想法、待办事项和心情。</text>
   </view>
 
   <view class="input-section section-card">
     <view class="section-head">
       <text class="section-title">快速记录</text>
-      <text class="section-tag">{{voiceAvailable ? (isRecording ? '录音中' : '支持语音') : '手动输入'}}</text>
     </view>
     <textarea
       class="input-area"
@@ -23,13 +22,6 @@
       maxlength="-1"
       auto-height
     ></textarea>
-    <view class="voice-bar">
-      <button class="voice-btn {{isRecording ? 'voice-btn-recording' : ''}}" bindtap="toggleVoiceInput">
-        <text class="voice-btn-icon">{{isRecording ? '■' : '🎤'}}</text>
-        <text class="voice-btn-text">{{isRecording ? '结束录音' : '开始录音'}}</text>
-      </button>
-      <text class="voice-status">{{voiceStatus}}</text>
-    </view>
     <button class="save-btn" bindtap="saveInput">
       <text class="save-btn-icon">💾</text>
       <text class="save-btn-text">保存记录</text>
@@ -53,18 +45,36 @@
                 <text class="audio-record-title">语音记录</text>
                 <text class="audio-record-desc">{{item.audioDurationText || '时长未知'}}</text>
               </view>
-              <button
-                class="audio-play-btn {{playingRecordId === item._id ? 'audio-play-btn-active' : ''}}"
-                data-id="{{item._id}}"
-                data-fileid="{{item.audioFileID}}"
-                bindtap="playAudio"
-              >{{playingRecordId === item._id ? '⏸' : '▶'}}</button>
+              <view class="record-actions">
+                <button
+                  class="audio-play-btn {{playingRecordId === item._id ? 'audio-play-btn-active' : ''}}"
+                  data-id="{{item._id}}"
+                  data-fileid="{{item.audioFileID}}"
+                  bindtap="playAudio"
+                >{{playingRecordId === item._id ? '⏸' : '▶'}}</button>
+                <button class="edit-btn" data-id="{{item._id}}" bindtap="editRecord">
+                  <text class="edit-btn-icon">✏️</text>
+                </button>
+                <button class="delete-btn" data-id="{{item._id}}" bindtap="deleteRecord">
+                  <text class="delete-btn-icon">×</text>
+                </button>
+              </view>
             </view>
             <text class="audio-record-note">{{item.transcriptText || item.content}}</text>
             <text class="record-item-time">{{item.createTime}}</text>
           </view>
           <view wx:else class="record-item-content">
-            <text class="record-item-text">{{item.content}}</text>
+            <view class="record-text-row">
+              <text class="record-item-text">{{item.content}}</text>
+              <view class="record-actions">
+                <button class="edit-btn" data-id="{{item._id}}" bindtap="editRecord">
+                  <text class="edit-btn-icon">✏️</text>
+                </button>
+                <button class="delete-btn" data-id="{{item._id}}" bindtap="deleteRecord">
+                  <text class="delete-btn-icon">×</text>
+                </button>
+              </view>
+            </view>
             <text class="record-item-time">{{item.createTime}}</text>
           </view>
         </view>
@@ -72,7 +82,7 @@
       <view wx:else class="empty-state">
         <text class="empty-icon">📝</text>
         <text class="empty-title">近两周还没有记录</text>
-        <text class="empty-desc">可以先打字，也可以点击录音按钮保存一条语音记录。</text>
+        <text class="empty-desc">可以先打字记录下今天的想法、待办、心情或临时灵感。</text>
       </view>
     </scroll-view>
   </view>

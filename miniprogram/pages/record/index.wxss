@@ -231,6 +231,103 @@
   gap: 18rpx;
 }
 
+.record-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.record-text-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18rpx;
+}
+
+.edit-btn {
+  min-width: 40rpx;
+  height: 40rpx;
+  margin: 0;
+  padding: 0;
+  border-radius: 8rpx;
+  background: #f8fafc;
+  color: #94a3b8;
+  font-size: 24rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  border: 1rpx solid #e2e8f0;
+}
+
+.edit-btn::after {
+  border: none;
+}
+
+.edit-btn:hover {
+  background: #f1f5f9;
+  color: #64748b;
+  border-color: #cbd5e1;
+}
+
+.edit-btn:active {
+  background: #e2e8f0;
+  color: #334155;
+  transform: scale(0.95);
+}
+
+.edit-btn-icon {
+  font-size: 18rpx;
+}
+
+.delete-btn {
+  min-width: 40rpx;
+  height: 40rpx;
+  margin: 0;
+  padding: 0;
+  border-radius: 8rpx;
+  background: #f8fafc;
+  color: #94a3b8;
+  font-size: 24rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  border: 1rpx solid #e2e8f0;
+}
+
+.delete-btn::after {
+  border: none;
+}
+
+.delete-btn:hover {
+  background: #f1f5f9;
+  color: #64748b;
+  border-color: #cbd5e1;
+}
+
+.delete-btn:active {
+  background: #e2e8f0;
+  color: #334155;
+  transform: scale(0.95);
+}
+
+.delete-btn-icon {
+  font-size: 20rpx;
+  font-weight: 600;
+}
+
+.record-item-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #1f2937;
+  line-height: 1.7;
+  word-break: break-word;
+}
+
 .audio-record-main {
   flex: 1;
   display: flex;

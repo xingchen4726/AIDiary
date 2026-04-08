@@ -500,5 +500,100 @@ Page({
         });
       }
     });
+  },
+
+  editRecord(e) {
+    const recordId = e.currentTarget.dataset.id;
+    if (!recordId) {
+      wx.showToast({
+        title: '获取记录ID失败',
+        icon: 'none'
+      });
+      return;
+    }
+
+    const record = this.data.records.find(item => item._id === recordId);
+    if (!record) {
+      wx.showToast({
+        title: '获取记录失败',
+        icon: 'none'
+      });
+      return;
+    }
+
+    wx.showModal({
+      title: '修改记录',
+      editable: true,
+      placeholderText: '请输入新的内容',
+      content: record.content,
+      success: (res) => {
+        if (res.confirm && res.content) {
+          const newContent = res.content.trim();
+          if (!newContent) {
+            wx.showToast({
+              title: '内容不能为空',
+              icon: 'none'
+            });
+            return;
+          }
+
+          const db = wx.cloud.database();
+          db.collection('records').doc(recordId).update({
+            data: {
+              content: newContent
+            },
+            success: () => {
+              wx.showToast({
+                title: '修改成功',
+                icon: 'success'
+              });
+              this.getRecords();
+            },
+            fail: () => {
+              wx.showToast({
+                title: '修改失败，请重试',
+                icon: 'none'
+              });
+            }
+          });
+        }
+      }
+    });
+  },
+
+  deleteRecord(e) {
+    const recordId = e.currentTarget.dataset.id;
+    if (!recordId) {
+      wx.showToast({
+        title: '获取记录ID失败',
+        icon: 'none'
+      });
+      return;
+    }
+
+    wx.showModal({
+      title: '确认删除',
+      content: '确定要删除这条记录吗？删除后不可恢复。',
+      success: (res) => {
+        if (res.confirm) {
+          const db = wx.cloud.database();
+          db.collection('records').doc(recordId).remove({
+            success: () => {
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success'
+              });
+              this.getRecords();
+            },
+            fail: () => {
+              wx.showToast({
+                title: '删除失败，请重试',
+                icon: 'none'
+              });
+            }
+          });
+        }
+      }
+    });
   }
 });

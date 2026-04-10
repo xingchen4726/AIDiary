@@ -16,12 +16,19 @@ function formatRecordDateTime(date) {
   return `${formatRecordDate(date)}${period}${displayHour}:${padNumber(date.getMinutes())}:${padNumber(date.getSeconds())}`;
 }
 
+function formatPickerDate(date) {
+  return `${date.getFullYear()}-${padNumber(date.getMonth() + 1)}-${padNumber(date.getDate())}`;
+}
+
 Page({
   data: {
     inputValue: '',
     records: [],
     isRecording: false,
     voiceAvailable: true,
+    showVoiceEntry: false,
+    selectedRecordDate: '',
+    showInputTip: false,
     voiceStatus: '点击开始录音，保存一条语音记录',
     recentRangeText: '近14天记录',
     recentRecordCount: 0,
@@ -35,7 +42,8 @@ Page({
     this.currentPlayingRecordId = '';
     this.innerAudioContext = wx.createInnerAudioContext();
     this.setData({
-      isDevtools: systemInfo.platform === 'devtools'
+      isDevtools: systemInfo.platform === 'devtools',
+      selectedRecordDate: formatPickerDate(new Date())
     });
     this.initVoiceInput();
     this.initAudioPlayer();
@@ -128,6 +136,24 @@ Page({
   inputContent(e) {
     this.setData({
       inputValue: e.detail.value
+    });
+  },
+
+  onRecordDateChange(e) {
+    this.setData({
+      selectedRecordDate: e.detail.value
+    });
+  },
+
+  handleInputFocus() {
+    this.setData({
+      showInputTip: true
+    });
+  },
+
+  handleInputBlur() {
+    this.setData({
+      showInputTip: false
     });
   },
 
@@ -344,6 +370,7 @@ Page({
     this.saveRecord(content);
     this.setData({
       inputValue: '',
+      showInputTip: false,
       voiceStatus: this.data.voiceAvailable ? '点击开始录音，保存一条语音记录' : this.data.voiceStatus
     });
   },
@@ -351,9 +378,18 @@ Page({
   saveRecord(content, extra = {}) {
     const db = wx.cloud.database();
     const now = new Date();
-    const createTime = formatRecordDateTime(now);
-    const timestamp = now.getTime();
-    const date = formatRecordDate(now);
+    const selected = this.data.selectedRecordDate || formatPickerDate(now);
+    const parts = selected.split('-').map(item => Number(item));
+    const year = parts[0];
+    const month = parts[1];
+    const day = parts[2];
+    const isValidDate = year && month && day;
+    const recordDate = isValidDate
+      ? new Date(year, month - 1, day, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds())
+      : now;
+    const createTime = formatRecordDateTime(recordDate);
+    const timestamp = recordDate.getTime();
+    const date = formatRecordDate(recordDate);
 
     db.collection('records').add({
       data: {

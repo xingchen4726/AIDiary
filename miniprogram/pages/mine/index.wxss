@@ -1,40 +1,52 @@
 .container {
+  width: 100%;
   min-height: 100vh;
-  padding: 32rpx 24rpx 120rpx;
-  background: linear-gradient(180deg, #f4f8ff 0%, #f6f7fb 42%, #edf2ff 100%);
+  padding: 34rpx 26rpx 120rpx;
+  background: linear-gradient(180deg, #fbf8f2 0%, #f7f2ff 46%, #f2f6ff 100%);
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .header {
-  margin-bottom: 28rpx;
+  width: 100%;
+  margin-bottom: 26rpx;
 }
 
 .title {
   display: block;
   font-size: 52rpx;
   font-weight: 700;
-  color: #1f2937;
+  color: #2b2434;
   line-height: 1.2;
+  letter-spacing: 1rpx;
 }
 
 .subtitle {
   display: block;
-  margin-top: 12rpx;
+  margin-top: 10rpx;
   font-size: 24rpx;
-  color: #667085;
+  color: #7d748b;
   line-height: 1.6;
 }
 
 .section-card {
+  width: 100%;
+  box-sizing: border-box;
   padding: 28rpx;
-  border-radius: 28rpx;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 18rpx 40rpx rgba(15, 23, 42, 0.06);
+  border-radius: 30rpx;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1rpx solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 18rpx 44rpx rgba(60, 46, 90, 0.08);
   margin-bottom: 24rpx;
 }
 
 .user-card {
   padding: 32rpx;
+  background: linear-gradient(140deg, #7160ff 0%, #9f7cff 55%, #b995ff 100%);
+  border: none;
+  box-shadow: 0 24rpx 48rpx rgba(96, 72, 178, 0.24);
 }
 
 .user-info {
@@ -48,7 +60,7 @@
   height: 120rpx;
   border-radius: 50%;
   object-fit: cover;
-  border: 4rpx solid #e0e7ff;
+  border: 4rpx solid rgba(255, 255, 255, 0.75);
 }
 
 .user-details {
@@ -59,14 +71,14 @@
   display: block;
   font-size: 32rpx;
   font-weight: 600;
-  color: #1f2937;
+  color: #ffffff;
   margin-bottom: 8rpx;
 }
 
 .user-id {
   display: block;
   font-size: 20rpx;
-  color: #98a2b3;
+  color: rgba(255, 255, 255, 0.86);
   line-height: 1.4;
 }
 
@@ -80,23 +92,23 @@
   flex: 1;
   text-align: center;
   padding: 20rpx 0;
-  border-radius: 16rpx;
-  background: #f8faff;
-  border: 1rpx solid #e0e7ff;
+  border-radius: 18rpx;
+  background: linear-gradient(160deg, #ffffff 0%, #fdfaff 100%);
+  border: 1rpx solid #efe5ff;
 }
 
 .stat-number {
   display: block;
   font-size: 36rpx;
   font-weight: 700;
-  color: #4f7cff;
+  color: #6b55b5;
   margin-bottom: 8rpx;
 }
 
 .stat-label {
   display: block;
   font-size: 22rpx;
-  color: #667085;
+  color: #7d748b;
 }
 
 .section-head {
@@ -107,7 +119,7 @@
   display: block;
   font-size: 30rpx;
   font-weight: 600;
-  color: #1f2937;
+  color: #312a3d;
 }
 
 .setting-list {
@@ -120,22 +132,26 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24rpx 0;
-  border-bottom: 1rpx solid #edf2f7;
+  padding: 24rpx 20rpx;
+  border-radius: 16rpx;
+  border-bottom: none;
+  background: linear-gradient(160deg, #ffffff 0%, #fdfaff 100%);
+  border: 1rpx solid #efe5ff;
+  margin-bottom: 12rpx;
 }
 
 .setting-item:last-child {
-  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .setting-label {
   font-size: 26rpx;
-  color: #1f2937;
+  color: #3d3250;
 }
 
 .setting-arrow {
   font-size: 32rpx;
-  color: #98a2b3;
+  color: #9a8faf;
   font-weight: 300;
 }
 
@@ -148,13 +164,13 @@
 .footer-text {
   display: block;
   font-size: 22rpx;
-  color: #667085;
+  color: #7d748b;
   margin-bottom: 8rpx;
 }
 
 .footer-desc {
   display: block;
   font-size: 20rpx;
-  color: #98a2b3;
+  color: #9a8faf;
   line-height: 1.4;
 }

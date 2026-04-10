@@ -14,14 +14,34 @@
     <view class="section-head">
       <text class="section-title">快速记录</text>
     </view>
-    <textarea
-      class="input-area"
-      placeholder="写下今天的想法、待办、心情或临时灵感..."
-      bindinput="inputContent"
-      value="{{inputValue}}"
-      maxlength="-1"
-      auto-height
-    ></textarea>
+    <view class="input-tools">
+      <text class="date-label">记录日期</text>
+      <picker mode="date" value="{{selectedRecordDate}}" bindchange="onRecordDateChange">
+        <view class="date-picker-trigger">
+          <text class="date-value">{{selectedRecordDate}}</text>
+          <text class="date-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+    <view class="input-wrap">
+      <textarea
+        class="input-area"
+        placeholder="写下今天的想法、待办、心情或临时灵感..."
+        bindinput="inputContent"
+        bindfocus="handleInputFocus"
+        bindblur="handleInputBlur"
+        value="{{inputValue}}"
+        maxlength="-1"
+      ></textarea>
+      <view wx:if="{{showInputTip}}" class="input-tip">可使用手机键盘自带语音输入，更快记录内容</view>
+    </view>
+    <view wx:if="{{showVoiceEntry}}" class="voice-bar">
+      <button class="voice-btn {{isRecording ? 'voice-btn-recording' : ''}}" bindtap="toggleVoiceInput">
+        <text class="voice-btn-icon">{{isRecording ? '⏹' : '🎙️'}}</text>
+        <text class="voice-btn-text">{{isRecording ? '结束录音' : '开始录音'}}</text>
+      </button>
+      <text class="voice-status">{{voiceStatus}}</text>
+    </view>
     <button class="save-btn" bindtap="saveInput">
       <text class="save-btn-icon">💾</text>
       <text class="save-btn-text">保存记录</text>
@@ -46,18 +66,18 @@
                 <text class="audio-record-desc">{{item.audioDurationText || '时长未知'}}</text>
               </view>
               <view class="record-actions">
-                <button
+                <view
                   class="audio-play-btn {{playingRecordId === item._id ? 'audio-play-btn-active' : ''}}"
                   data-id="{{item._id}}"
                   data-fileid="{{item.audioFileID}}"
                   bindtap="playAudio"
-                >{{playingRecordId === item._id ? '⏸' : '▶'}}</button>
-                <button class="edit-btn" data-id="{{item._id}}" bindtap="editRecord">
+                >{{playingRecordId === item._id ? '⏸' : '▶'}}</view>
+                <view class="edit-btn" data-id="{{item._id}}" bindtap="editRecord">
                   <text class="edit-btn-icon">✏️</text>
-                </button>
-                <button class="delete-btn" data-id="{{item._id}}" bindtap="deleteRecord">
+                </view>
+                <view class="delete-btn" data-id="{{item._id}}" bindtap="deleteRecord">
                   <text class="delete-btn-icon">×</text>
-                </button>
+                </view>
               </view>
             </view>
             <text class="audio-record-note">{{item.transcriptText || item.content}}</text>
@@ -67,12 +87,12 @@
             <view class="record-text-row">
               <text class="record-item-text">{{item.content}}</text>
               <view class="record-actions">
-                <button class="edit-btn" data-id="{{item._id}}" bindtap="editRecord">
+                <view class="edit-btn" data-id="{{item._id}}" bindtap="editRecord">
                   <text class="edit-btn-icon">✏️</text>
-                </button>
-                <button class="delete-btn" data-id="{{item._id}}" bindtap="deleteRecord">
+                </view>
+                <view class="delete-btn" data-id="{{item._id}}" bindtap="deleteRecord">
                   <text class="delete-btn-icon">×</text>
-                </button>
+                </view>
               </view>
             </view>
             <text class="record-item-time">{{item.createTime}}</text>

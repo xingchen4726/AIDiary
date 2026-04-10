@@ -1,35 +1,44 @@
 .container {
+  width: 100%;
   min-height: 100vh;
-  padding: 32rpx 24rpx 120rpx;
-  background: linear-gradient(180deg, #f4f8ff 0%, #f6f7fb 42%, #edf2ff 100%);
+  padding: 34rpx 26rpx 120rpx;
+  background: linear-gradient(180deg, #fbf8f2 0%, #f7f2ff 46%, #f2f6ff 100%);
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .header {
-  margin-bottom: 28rpx;
+  width: 100%;
+  margin-bottom: 26rpx;
 }
 
 .title {
   display: block;
   font-size: 52rpx;
   font-weight: 700;
-  color: #1f2937;
+  color: #2b2434;
   line-height: 1.2;
+  letter-spacing: 1rpx;
 }
 
 .subtitle {
   display: block;
-  margin-top: 12rpx;
+  margin-top: 10rpx;
   font-size: 24rpx;
-  color: #667085;
+  color: #7d748b;
   line-height: 1.6;
 }
 
 .section-card {
+  width: 100%;
+  box-sizing: border-box;
   padding: 28rpx;
-  border-radius: 28rpx;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 18rpx 40rpx rgba(15, 23, 42, 0.06);
+  border-radius: 30rpx;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1rpx solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 18rpx 44rpx rgba(60, 46, 90, 0.08);
   margin-bottom: 24rpx;
 }
 
@@ -38,22 +47,22 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 20rpx;
-  margin-bottom: 20rpx;
+  margin-bottom: 22rpx;
 }
 
 .section-title {
   display: block;
   font-size: 30rpx;
   font-weight: 600;
-  color: #1f2937;
+  color: #312a3d;
 }
 
 .section-tag {
   flex-shrink: 0;
   padding: 10rpx 18rpx;
   border-radius: 999rpx;
-  background: #eef2ff;
-  color: #4f46e5;
+  background: #f3ecff;
+  color: #6b5f86;
   font-size: 22rpx;
 }
 
@@ -65,14 +74,16 @@
 
 .summary-btn {
   width: 100%;
+  margin: 0;
   padding: 32rpx;
   border: none;
-  border-radius: 24rpx;
+  border-radius: 26rpx;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 12rpx;
-  box-shadow: 0 16rpx 30rpx rgba(79, 124, 255, 0.15);
+  box-sizing: border-box;
+  box-shadow: 0 16rpx 30rpx rgba(99, 87, 188, 0.22);
 }
 
 .summary-btn::after {
@@ -80,17 +91,17 @@
 }
 
 .summary-btn-daily {
-  background: linear-gradient(135deg, #14b8a6 0%, #0ea5e9 100%);
+  background: linear-gradient(140deg, #6f63ff 0%, #8e74ff 55%, #b08cff 100%);
   color: #ffffff;
 }
 
 .summary-btn-weekly {
-  background: linear-gradient(135deg, #4f7cff 0%, #6d5dfc 100%);
+  background: linear-gradient(140deg, #5d78ff 0%, #6d7eff 55%, #8ea0ff 100%);
   color: #ffffff;
 }
 
 .summary-btn-icon {
-  font-size: 48rpx;
+  font-size: 44rpx;
 }
 
 .summary-btn-text {
@@ -107,8 +118,8 @@
   flex-shrink: 0;
   padding: 10rpx 18rpx;
   border-radius: 999rpx;
-  background: #f2f4f7;
-  color: #475467;
+  background: #f3ecff;
+  color: #6b5f86;
   font-size: 22rpx;
 }
 
@@ -117,11 +128,12 @@
 }
 
 .summary-item {
+  box-sizing: border-box;
   padding: 24rpx;
   border-radius: 20rpx;
-  background: #f8faff;
+  background: linear-gradient(160deg, #ffffff 0%, #fdfaff 100%);
   margin-bottom: 16rpx;
-  border: 1rpx solid #e0e7ff;
+  border: 1rpx solid #efe5ff;
 }
 
 .summary-item-header {
@@ -134,20 +146,21 @@
 .summary-item-title {
   font-size: 26rpx;
   font-weight: 600;
-  color: #1f2937;
+  color: #5f48a3;
 }
 
 .summary-item-date {
   font-size: 20rpx;
-  color: #98a2b3;
+  color: #a297b4;
 }
 
 .summary-item-content {
   font-size: 24rpx;
-  color: #475467;
-  line-height: 1.7;
+  color: #574d67;
+  line-height: 1.68;
   margin-bottom: 16rpx;
   word-break: break-word;
+  writing-mode: horizontal-tb;
 }
 
 .summary-item-footer {
@@ -157,11 +170,11 @@
 
 .copy-btn {
   margin: 0;
-  padding: 8rpx 16rpx;
-  border: 1rpx solid #d1d5db;
-  border-radius: 12rpx;
-  background: #ffffff;
-  color: #475467;
+  padding: 8rpx 18rpx;
+  border: 1rpx solid #ece3ff;
+  border-radius: 999rpx;
+  background: #f6f1ff;
+  color: #8575a7;
   font-size: 20rpx;
   display: flex;
   align-items: center;
@@ -185,13 +198,13 @@
   display: block;
   font-size: 28rpx;
   font-weight: 600;
-  color: #344054;
+  color: #4b3f61;
 }
 
 .empty-desc {
   display: block;
   margin-top: 12rpx;
   font-size: 24rpx;
-  color: #98a2b3;
+  color: #9a8faf;
   line-height: 1.7;
 }

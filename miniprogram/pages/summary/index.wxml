@@ -29,7 +29,7 @@
       <text class="records-count">{{summaryHistory.length}} 条</text>
     </view>
     <scroll-view class="summary-scroll" scroll-y enhanced show-scrollbar="false">
-      <view wx:if="summaryHistory.length > 0">
+      <view wx:if="{{summaryHistory.length > 0}}">
         <view class="summary-item" wx:for="{{summaryHistory}}" wx:key="_id">
           <view class="summary-item-header">
             <text class="summary-item-title">{{item.type === 'daily' ? '每日日记' : '每周周报'}}</text>

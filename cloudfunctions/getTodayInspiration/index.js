@@ -21,8 +21,12 @@ try {
       ...todayApiConfig,
       ...config.todayApiConfig
     };
+    console.log('配置加载成功:', { url: todayApiConfig.url, id: todayApiConfig.id });
+  } else {
+    console.log('配置未加载或不完整');
   }
 } catch (error) {
+  console.log('配置文件加载失败:', error.message);
 }
 
 function padNumber(value) {
@@ -83,6 +87,7 @@ function sampleItems(list, count) {
 }
 
 async function getCachedFacts(monthDay, dateStartTimestamp) {
+  console.log('尝试从缓存获取数据:', { monthDay, dateStartTimestamp });
   const res = await db.collection('todayFacts')
     .where({
       monthDay,
@@ -91,14 +96,18 @@ async function getCachedFacts(monthDay, dateStartTimestamp) {
     })
     .limit(1)
     .get();
+  console.log('缓存查询结果:', res.data);
   if (!res.data.length) {
+    console.log('缓存未命中');
     return [];
   }
   const facts = res.data[0].facts || [];
+  console.log('从缓存获取的数据:', facts);
   return Array.isArray(facts) ? facts : [];
 }
 
 async function saveFactsCache(monthDay, dateStartTimestamp, facts) {
+  console.log('开始保存缓存:', { monthDay, dateStartTimestamp, factsCount: facts.length });
   const res = await db.collection('todayFacts')
     .where({
       monthDay,
@@ -106,6 +115,7 @@ async function saveFactsCache(monthDay, dateStartTimestamp, facts) {
     })
     .limit(1)
     .get();
+  console.log('缓存查询结果:', res.data);
   const cacheData = {
     monthDay,
     source: 'aa1',
@@ -114,43 +124,70 @@ async function saveFactsCache(monthDay, dateStartTimestamp, facts) {
     updatedAt: Date.now()
   };
   if (res.data.length) {
+    console.log('更新现有缓存:', res.data[0]._id);
     await db.collection('todayFacts').doc(res.data[0]._id).update({
       data: cacheData
     });
-    return;
+    console.log('缓存更新成功');
+  } else {
+    console.log('创建新缓存');
+    await db.collection('todayFacts').add({
+      data: cacheData
+    });
+    console.log('缓存创建成功');
   }
-  await db.collection('todayFacts').add({
-    data: cacheData
-  });
+  console.log('缓存保存成功');
 }
 
 async function fetchFactsFromApi() {
   if (!todayApiConfig.id || !todayApiConfig.key) {
+    console.log('API配置不完整，跳过API调用');
     return [];
   }
-  const response = await axios.get(todayApiConfig.url, {
-    params: {
-      id: todayApiConfig.id,
-      key: todayApiConfig.key
-    },
-    timeout: 10000
-  });
-  const body = response.data || {};
-  if (body.code !== 200) {
+  console.log('开始调用API:', todayApiConfig.url);
+  try {
+    const response = await axios.get(todayApiConfig.url, {
+      params: {
+        id: todayApiConfig.id,
+        key: todayApiConfig.key
+      },
+      timeout: 10000
+    });
+    console.log('API调用成功，状态码:', response.status);
+    console.log('API返回数据:', response.data);
+    const body = response.data || {};
+    if (body.code !== 200) {
+      console.log('API返回错误码:', body.code);
+      console.log('API返回错误信息:', body.msg || '无错误信息');
+      console.log('API调用失败：返回错误状态码');
+      return [];
+    }
+    const parsedFacts = parseFactsFromAa1Body(body);
+    console.log('解析后的数据:', parsedFacts);
+    console.log('API调用成功：获取到有效数据');
+    return parsedFacts;
+  } catch (error) {
+    console.log('API调用失败:', error.message);
+    console.log('API调用失败：网络或其他错误');
     return [];
   }
-  return parseFactsFromAa1Body(body);
 }
 
 async function getFacts(monthDay, dateStartTimestamp) {
+  console.log('开始获取事实数据:', { monthDay, dateStartTimestamp });
   const cachedFacts = await getCachedFacts(monthDay, dateStartTimestamp);
   if (cachedFacts.length) {
+    console.log('使用缓存数据:', cachedFacts.length, '条');
     return cachedFacts;
   }
+  console.log('缓存未命中，从API获取数据');
   const facts = await fetchFactsFromApi();
+  console.log('从API获取到数据:', facts.length, '条');
   if (facts.length) {
+    console.log('保存数据到缓存');
     await saveFactsCache(monthDay, dateStartTimestamp, facts);
   }
+  console.log('获取事实数据完成:', facts.length, '条');
   return facts;
 }
 
